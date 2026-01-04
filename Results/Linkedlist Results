@@ -1,0 +1,15 @@
+Run 1: Allocation successful
+Run 2: Allocation successful
+Run 3: Allocation successful
+Run 4: Allocation successful
+Run 5: Allocation successful
+...
+Run 96: Allocation successful
+Run 97: Allocation successful
+Run 98: Allocation successful
+Run 99: Allocation successful
+Run 100: Allocation successful
+
+Total runs executed: 100
+Total execution time: 0.000025 seconds
+Average execution time per run: 0.00000025 seconds
