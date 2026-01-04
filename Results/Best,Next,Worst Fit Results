@@ -1,1 +1,75 @@
+STEP 1
+Best Fit Free List:  [10,90]
+Worst Fit Free List: [10,90]
+Next Fit Free List:  [10,90]
+STEP 2
+Best Fit Free List:  [15,85]
+Worst Fit Free List: [15,85]
+Next Fit Free List:  [15,85]
+STEP 3
+Best Fit Free List:  [35,65]
+Worst Fit Free List: [35,65]
+Next Fit Free List:  [35,65]
+STEP 4
+Best Fit Free List:  [10,5] [35,65]
+Worst Fit Free List: [10,5] [35,65]
+Next Fit Free List:  [10,5] [35,65]
+STEP 5
+Best Fit Free List:  [10,5] [47,53]
+Worst Fit Free List: [10,5] [47,53]
+Next Fit Free List:  [10,5] [47,53]
+STEP 6
+Best Fit Free List:  [0,10] [10,5] [47,53]
+Worst Fit Free List: [0,10] [10,5] [47,53]
+Next Fit Free List:  [0,10] [10,5] [47,53]
+STEP 7
+Best Fit Free List:  [8,2] [10,5] [47,53]
+Worst Fit Free List: [0,10] [10,5] [55,45]
+Next Fit Free List:  [0,10] [10,5] [55,45]
+STEP 8
+Best Fit Free List:  [8,2] [10,5] [53,47]
+Worst Fit Free List: [0,10] [10,5] [61,39]
+Next Fit Free List:  [0,10] [10,5] [61,39]
+STEP 9
+Best Fit Free List:  [8,2] [10,5] [60,40]
+Worst Fit Free List: [0,10] [10,5] [68,32]
+Next Fit Free List:  [0,10] [10,5] [68,32]
+STEP 10
+Best Fit Free List:  [8,2] [13,2] [60,40]
+Worst Fit Free List: [0,10] [10,5] [71,29]
+Next Fit Free List:  [0,10] [10,5] [71,29]
+STEP 11
+Best Fit Free List:  [8,2] [13,2] [70,30]
+Worst Fit Free List: [0,10] [10,5] [81,19]
+Next Fit Free List:  [0,10] [10,5] [81,19]
+
+
+--- Best Fit ---
+Free list before big allocation:
+[start=77 size=5] [start=82 size=10] [start=56 size=5] [start=15 size=10] [start=92 size=8]
+Big allocation (25) FAIL
+Final free list:
+[start=77 size=5] [start=82 size=10] [start=56 size=5] [start=15 size=10] [start=92 size=8]
+
+
+--- Worst Fit ---
+Free list before big allocation:
+[start=41 size=10] [start=30 size=11] [start=51 size=12] [start=51 size=12] [start=82 size=18]
+Big allocation (25) FAIL
+Final free list:
+[start=41 size=10] [start=30 size=11] [start=51 size=12] [start=51 size=12] [start=82 size=18]
+
+
+--- Next Fit ---
+Free list before big allocation:
+[start=62 size=12] [start=16 size=12] [start=5 size=11] [start=62 size=12] [start=96 size=4]
+Big allocation (25) FAIL
+Final free list:
+[start=62 size=12] [start=16 size=12] [start=5 size=11] [start=62 size=12] [start=96 size=4]
+
+Q3E. Experiment 3 – Speed Test:
+
+Best Fit time:  0.000008 seconds
+Worst Fit time: 0.000006 seconds
+Next Fit time:  0.000005 seconds
 
