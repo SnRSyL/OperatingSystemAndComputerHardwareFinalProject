@@ -1,1 +1,159 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Block {
+    int start;
+    int size;
+    struct Block* next;
+} Block;
+
+Block* freeList = NULL;
+Block* lastAllocated = NULL;
+
+/* initialize memory */
+void initMemory(int totalSize) {
+    freeList = malloc(sizeof(Block));
+    freeList->start = 0;
+    freeList->size = totalSize;
+    freeList->next = NULL;
+}
+
+/* print free list */
+void printFreeList() {
+    Block* curr = freeList;
+    printf("Free List: ");
+    while (curr) {
+        printf("[Start=%d Size=%d] -> ", curr->start, curr->size);
+        curr = curr->next;
+    }
+    printf("NULL\n");
+}
+
+/* allocate best fit */
+void allocate_best_fit(int req) {
+    Block *curr = freeList, *best = NULL;
+    Block *prev = NULL, *bestPrev = NULL;
+
+    while (curr) {
+        if (curr->size >= req) {
+            if (!best || curr->size < best->size) {
+                best = curr;
+                bestPrev = prev;
+            }
+        }
+        prev = curr;
+        curr = curr->next;
+    }
+
+    if (!best) {
+        printf("Best Fit: Allocation of %d failed\n", req);
+        return;
+    }
+
+    printf("Best Fit: Allocated %d at %d\n", req, best->start);
+    best->start += req;
+    best->size -= req;
+
+    if (best->size == 0) {
+        if (bestPrev)
+            bestPrev->next = best->next;
+        else
+            freeList = best->next;
+        free(best);
+    }
+}
+
+/* allocate worst fit */
+void allocate_worst_fit(int req) {
+    Block *curr = freeList, *worst = NULL;
+    Block *prev = NULL, *worstPrev = NULL;
+
+    while (curr) {
+        if (curr->size >= req) {
+            if (!worst || curr->size > worst->size) {
+                worst = curr;
+                worstPrev = prev;
+            }
+        }
+        prev = curr;
+        curr = curr->next;
+    }
+
+    if (!worst) {
+        printf("Worst Fit: Allocation of %d failed\n", req);
+        return;
+    }
+
+    printf("Worst Fit: Allocated %d at %d\n", req, worst->start);
+    worst->start += req;
+    worst->size -= req;
+
+    if (worst->size == 0) {
+        if (worstPrev)
+            worstPrev->next = worst->next;
+        else
+            freeList = worst->next;
+        free(worst);
+    }
+}
+
+/* allocate next fit */
+void allocate_next_fit(int req) {
+    if (!lastAllocated)
+        lastAllocated = freeList;
+
+    Block* start = lastAllocated;
+    Block* curr = lastAllocated;
+
+    do {
+        if (curr->size >= req) {
+            printf("Next Fit: Allocated %d at %d\n", req, curr->start);
+            curr->start += req;
+            curr->size -= req;
+            lastAllocated = curr;
+
+            if (curr->size == 0)
+                free(curr);
+            return;
+        }
+        curr = curr->next ? curr->next : freeList;
+    } while (curr != start);
+
+    printf("Next Fit: Allocation of %d failed\n", req);
+}
+
+/* free and merge */
+void free_block(int start, int size) {
+    Block *curr = freeList, *prev = NULL;
+
+    Block* newBlock = malloc(sizeof(Block));
+    newBlock->start = start;
+    newBlock->size = size;
+
+    while (curr && curr->start < start) {
+        prev = curr;
+        curr = curr->next;
+    }
+
+    newBlock->next = curr;
+    if (prev)
+        prev->next = newBlock;
+    else
+        freeList = newBlock;
+
+    if (newBlock->next &&
+        newBlock->start + newBlock->size == newBlock->next->start) {
+        newBlock->size += newBlock->next->size;
+        Block* temp = newBlock->next;
+        newBlock->next = temp->next;
+        free(temp);
+    }
+
+    if (prev &&
+        prev->start + prev->size == newBlock->start) {
+        prev->size += newBlock->size;
+        prev->next = newBlock->next;
+        free(newBlock);
+    }
+}
 
