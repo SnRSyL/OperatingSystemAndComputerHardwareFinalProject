@@ -1,1 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Block {
+    int start;
+    int size;
+    struct Block* next;
+} Block;
+
+void print_list(Block* head) {
+    while (head) {
+        printf("[start=%d size=%d] ", head->start, head->size);
+        head = head->next;
+    }
+    printf("\n");
+}
+
+int main() {
+    Block* free_list = NULL;
+
+    // initial free block
+    free_list = malloc(sizeof(Block));
+    free_list->start = 0;
+    free_list->size = 100;
+    free_list->next = NULL;
+
+    printf("Step 1 - Initial Free List:\n");
+    print_list(free_list);
+
+    // simulate allocations
+    free_list->start += 10;
+    free_list->size -= 10;
+    printf("Step 2 - After allocation of 10:\n");
+    print_list(free_list);
+
+    free_list->start += 15;
+    free_list->size -= 15;
+    printf("Step 3 - After allocation of 15:\n");
+    print_list(free_list);
+
+    return 0;
+}
 
