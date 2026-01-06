@@ -76,25 +76,54 @@ results/
 
 README.md
 
-How to Compile and Run
+How to Run the Code
 
-All programs are written in C and can be compiled using gcc.
+All programs in this project are written in C and can be compiled using the gcc compiler.
 
-Example:
+Requirements
+
+GCC compiler
+
+Any Linux or macOS terminal (or Windows with MinGW)
+
+Compilation and Execution
+
+Navigate to the src directory and compile the desired test file.
+
+Example commands:
 
 gcc allocation_trace.c -o allocation_trace
 ./allocation_trace
 
 
-The same steps can be followed for other test files.
+To run the fragmentation test:
 
+gcc fragmentation_test.c -o fragmentation_test
+./fragmentation_test
+
+
+To run the speed test:
+
+gcc speed_test.c -o speed_test
+./speed_test
+
+
+Each program prints its output directly to the terminal.
+The output can be redirected to a file if needed:
+
+./allocation_trace > ../results/allocation_trace_output.txt
+
+
+The same method can be used for other tests.
 Notes on Reproducibility
 
 I organized the files using clear names and a simple folder structure to make the project easy to understand.
 Each test is separated into its own source file, and experiment outputs are saved in result files.
 This allows the experiments to be reproduced and verified easily.
 
+
 Conclusion
 
 Through this project, I observed how different memory allocation algorithms behave under fragmentation and performance tests.
 Each algorithm has its own advantages and disadvantages depending on speed and memory usage patterns.
+
